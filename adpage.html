@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+<script>
+window.onload=function(){
+	
+	var unparsed_users=localStorage.getItem("users"); 
+	var users=JSON.parse(unparsed_users);  
+	
+	var totalInfo = document.getElementById("userinfo_table").innerHTML;	
+	users.forEach(function (user) {
+		totalInfo += "<tr><td>" + user.uid+ "</td><td>" + user.uname+ "</td><td>" + user.uemail+ "</td><td>" + user.ugender+ "</td><td><button id='smallbt' type='button' onclick='deleteUser(" + user.uid + ")'>Delete</button></td></tr>";
+	});
+	document.getElementById("userinfo_table").innerHTML = "<tbody>"+totalInfo+"</tbody>";	
+}
+
+function deleteUser(uid){
+	var unparsed_users=localStorage.getItem("users");
+	var users=JSON.parse(unparsed_users); 
+	var unparsed_contacts=localStorage.getItem("contacts");
+	var contacts=JSON.parse(unparsed_contacts); 
+	
+	users.splice(uid,1);
+	for(var i=0;i<contacts.length;i++){
+		if (contacts[i].uid==uid){
+			contacts.splice(contacts[i].cid,1);
+		}
+	}
+	
+	localStorage.setItem("users",JSON.stringify(users));
+	localStorage.setItem("contacts",JSON.stringify(contacts));
+	window.location = "adpage.html";
+	alert("Your have successfully deleted this user.");	
+	
+}
+
+</script>
+<style>
+#userinfo_section{
+	width:500px;
+	margin:50px auto;
+}
+
+#smallbt{
+	padding: 4px 8px;
+	font-size: 14px;
+	margin-left:20px;
+}
+
+#userinfo_table {
+	text-align: center;
+}
+
+
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="myscript.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+
+  	<nav>
+    <ul id="join">
+     <li><a href="index.html">Log Out</a></li>
+     <li><a href="adresetpw.html">Reset Password</a></li>
+    </ul> 
+    </nav>
+  
+</header>
+
+<hr>
+
+<section>
+<div id="userinfo_section">
+
+<h2>Users' Information in System</h2>
+<table id="userinfo_table" style="width:500px; margin:5px auto;" >
+<th><tr><td>ID</td><td>Name</td><td>E-mail</td><td>Gender</td></tr></th>
+</table>
+</div>
+</section>
+
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+

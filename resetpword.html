@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+<script>
+
+window.onload=function(){
+	var whois=sessionStorage.getItem("whois");
+	document.getElementById("username").innerHTML=whois;	
+}
+
+function resetPW(){
+	var op = document.getElementById("opword").value;
+	var np = document.getElementById("npword").value;
+	var cp = document.getElementById("cpword").value;
+	var unparsedusers=localStorage.getItem("users");
+	var users=JSON.parse(unparsedusers);
+	var uid=sessionStorage.getItem("uid"); 
+	
+	
+	if(op!=users[uid].pword){
+		alert("Please re-enter your password!");
+		document.getElementById("opword").value="";
+		document.getElementById("opword").onfocus();
+	}
+	else if(np!=cp){
+		alert("Please re-enter your new password.");
+		document.getElementById("npword").value="";
+		document.getElementById("cpword").value="";
+		document.getElementById("npword").onfocus();
+	}
+	else{
+		users[uid].pword=np;
+		localStorage.setItem("users",JSON.stringify(users));
+}
+alert("You have successfully changed your password!");
+window.location = "home.html";
+}
+		
+
+</script>
+<style>
+#userinfo_section{
+	width: 380px;
+	margin:40px auto;
+	padding:20px 40px;
+	background-color: #fbfbfb;
+	border: 1px solid #e4e1e1;
+	color:#666;
+	font-size:16px;
+	font-family: Constantia, "Lucida Bright", "DejaVu Serif", Georgia, serif;	
+}
+
+input{
+	width: 300px;
+	height: 30px;
+}
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="myscript.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+
+  	<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span id="username"></span>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="userinfo.html">My Info</a></li>
+      <li><a href="resetpword.html">Reset Password</a></li>
+      <li><a href="index.html">Signout</a></li>
+      <li class="divider"></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+	</div>
+  
+</header>
+
+<nav>
+<div id="menubar_container">
+    <ul id="menubar">
+    	<li><a href="home.html"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-home-un@2x.png" width="30px"><p>
+       	<p>Home</p></div></a></li>
+       	<li><a href="contacts.html"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-addressbook-un.png" width="28px"><p>
+       	<p>Contact Book</p></div></a></li>
+       <li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-calendar-un.png" width="30px"><p>
+       	<p>Calendar</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-myplaxo-un.png" width="36px"><p>
+       	<p>My Card</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-task-un.png" width="20px"><p>
+       	<p>Tasks</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-notes-un.png" width="26px"><p>
+       	<p>Notes</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-ecards-un.png" width="30px"><p>
+       	<p>Gifts</p></div></a></li>
+	</ul>
+</div>
+</nav>
+
+<section>
+<div id="userinfo_section">
+<h3><b>Change Password</b></h3><br>
+<form name= "userinfo_form">
+    Old Password<br>
+    <input type = "password" id="opword" name="opword" required /><br><br>
+    New Password<br>
+    <input type = "password" id="npword" name="npword" required/><br><br>
+    Confirm Password<br>
+    <input type = "password" id="cpword" name="cpword" required/><br><br>
+
+    <button type="button" onClick="resetPW()">Save</button>
+	</form>
+</div>
+</section>
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+<script>
+
+window.onload=function(){
+	var whois=sessionStorage.getItem("whois");
+	document.getElementById("username").innerHTML=whois;
+	
+	var unparsed_contacts=localStorage.getItem("contacts");
+	var contacts=JSON.parse(unparsed_contacts);  
+	
+	var totalInfo = document.getElementById("contact_table").innerHTML;	
+	contacts.forEach(function (contact) {
+		totalInfo += "<tr><td>" + contact.fname+" "+contact.lname + "</td><td><button id='smallbt' type='button' onclick='viewContact(" + contact.cid + ")'>View</button></td></tr>";
+	});
+	document.getElementById("contact_table").innerHTML = totalInfo;	
+}
+
+function viewContact(cid){
+	var input = "<form id='newcontact_form' name='newcontact_form'>First name<br><input type = 'text' id='fname' name='fname'/><br><br>Last name<br><input type = 'text' id='lname' name='lname'/><br><br>City<br><input type = 'text' id='city' name='city'/><br><br>State<br><input type = 'text' id='state' name='state'/><br><br>Address<br><input type = 'text' id='address' name='address'/><br><br>Zip<br><input type = 'text' id='zip' name='zip'/><br><br>E-mail address<br><input type = 'email' id='cemail' name='cemail'/><br><br>Gender<br><input type = 'text' id='cgender' name='cgender' list='genderlist'/><datalist id='genderlist'><option value='Male'/><option value='Female'/></datalist><br><br></form>"
+	var totalInfo = "<tr><td><button id='smallbt' type='button' onClick='editContactInfo()'>Edit</button><button id='smallbt' type='button' onclick='saveContactInfo(" + cid + ")'>Save</button><button id='smallbt' type='button' onclick='deleteContact(" + cid + ")'>Delete</button><br><br></td><tr><tr><td>"+input+"</td><tr>";
+	document.getElementById("detail_table").innerHTML = totalInfo;
+	
+	var unparsed_contacts=localStorage.getItem("contacts");
+	var contacts=JSON.parse(unparsed_contacts);  
+	
+	var fname=contacts[cid].fname; 
+	var lname=contacts[cid].lname; 
+	var city=contacts[cid].city; 
+	var state=contacts[cid].state; 
+	var address=contacts[cid].address; 
+	var zip=contacts[cid].zip; 
+	var cemail=contacts[cid].cemail;
+	var cgender=contacts[cid].cgender;
+	
+	document.getElementById("fname").value = fname;
+	document.getElementById("lname").value = lname;
+	document.getElementById("city").value = city;
+	document.getElementById("state").value = state;
+	document.getElementById("address").value = address;
+	document.getElementById("zip").value = zip;
+	document.getElementById("cemail").value = cemail;
+	document.getElementById("cgender").value = cgender;
+	
+	document.getElementById('fname').disabled = true;
+	document.getElementById('lname').disabled = true;
+	document.getElementById('city').disabled = true;
+	document.getElementById('state').disabled = true;
+	document.getElementById('address').disabled = true;
+	document.getElementById('zip').disabled = true;
+	document.getElementById('cemail').disabled = true;
+	document.getElementById('cgender').disabled = true;		
+}
+
+function editContactInfo(){
+	document.getElementById('fname').disabled = false;
+	document.getElementById('lname').disabled = false;
+	document.getElementById('city').disabled = false;
+	document.getElementById('state').disabled = false;
+	document.getElementById('address').disabled = false;
+	document.getElementById('zip').disabled = false;
+	document.getElementById('cemail').disabled = false;
+	document.getElementById('cgender').disabled = false;		
+	document.getElementById("fname").onfocus();
+	
+}
+function saveContactInfo(cid){
+	var unparsed_contacts=localStorage.getItem("contacts");
+	var contacts=JSON.parse(unparsed_contacts);  	
+	
+	contact.cid = cid;
+	contacts[cid].fname=document.getElementById("fname").value; 
+	contacts[cid].lname=document.getElementById("lname").value;
+	contacts[cid].city=document.getElementById("city").value;
+	contacts[cid].state=document.getElementById("state").value;
+	contacts[cid].address=document.getElementById("address").value;
+	contacts[cid].zip=document.getElementById("zip").value;
+	contacts[cid].cemail=document.getElementById("cemail").value; 
+	contacts[cid].cgender=document.getElementById("cgender").value; 
+		
+	localStorage.setItem("contacts",JSON.stringify(contacts));
+	alert("Your change has been successfully saved.");	
+	window.location = "contacts.html";
+}
+
+function deleteContact(cid){
+	var unparsed_contacts=localStorage.getItem("contacts");
+	var contacts=JSON.parse(unparsed_contacts); 
+	contacts.splice(cid,1);
+	localStorage.setItem("contacts",JSON.stringify(contacts));
+	window.location = "contacts.html";
+	alert("Your have successfully deleted this contact.");		
+}
+
+function addContact(){
+	var input = "<form id='newcontact_form' name='newcontact_form'>First name<br><input type = 'text' id='fname' name='fname'/><br><br>Last name<br><input type = 'text' id='lname' name='lname'/><br><br>City<br><input type = 'text' id='city' name='city'/><br><br>State<br><input type = 'text' id='state' name='state'/><br><br>Address<br><input type = 'text' id='address' name='address'/><br><br>Zip<br><input type = 'text' id='zip' name='zip'/><br><br>E-mail address<br><input type = 'email' id='cemail' name='cemail'/><br><br>Gender<br><input type = 'text' id='cgender' name='cgender' list='genderlist'/><datalist id='genderlist'><option value='Male'/><option value='Female'/></datalist><br><br></form>"
+	var totalInfo = "<tr><td><button id='smallbt' type='button' onClick='cancel()'>Cancel</button><button id='smallbt' type='button' onClick='saveContact()'>Done</button><br><br></td><tr><tr><td>"+input+"</td><tr>";
+	document.getElementById("detail_table").innerHTML = totalInfo;	
+	
+}
+
+function cancel(){
+	window.location = "contacts.html";
+}
+
+function saveContact(){
+	var unparsed_contacts=localStorage.getItem("contacts");
+	var contacts=JSON.parse(unparsed_contacts);  
+	if (contacts==null)
+		contacts=[];
+	
+	var contact={"cid":"","fname":"", "lname":"", "city":"", "state":"", "address":"", "zip":"", "cemail":"", "cgender":"","uid":""}; 
+	contact.cid = contacts.length;
+	contact.fname=document.getElementById("fname").value;
+	contact.lname=document.getElementById("lname").value;
+	contact.city=document.getElementById("city").value;
+	contact.state=document.getElementById("state").value;
+	contact.address=document.getElementById("address").value;
+	contact.zip=document.getElementById("zip").value;
+	contact.cemail=document.getElementById("cemail").value; 
+	contact.cgender=document.getElementById("cgender").value; 
+	contact.uid=sessionStorage.getItem("uid");
+		
+	contacts.push(contact);
+	localStorage.setItem("contacts",JSON.stringify(contacts));
+	alert("Now there are " + contacts.length + " contacts.");	
+	window.location = "contacts.html";
+
+}
+
+</script>
+
+<style>
+#contacts_section{
+	width:863px;
+	margin:20px auto;
+}
+
+#newcontact_form{
+	width:400px; 
+	margin:10px auto;
+}
+
+#smallbt{
+	padding: 4px 8px;
+	font-size: 14px;
+	margin-left:20px;
+}
+
+input{
+	width: 300px;
+	height: 30px;
+}
+
+#contact_table tr td {padding-top: 10px; padding-bottom:10px}
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="myscript.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+
+  	<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span id="username"></span>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="userinfo.html">My Info</a></li>
+      <li><a href="resetpword.html">Reset Password</a></li>
+      <li><a href="index.html">Signout</a></li>
+      <li class="divider"></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+	</div>
+  
+</header>
+
+<nav>
+<div id="menubar_container">
+    <ul id="menubar">
+    	<li><a href="home.html"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-home-un@2x.png" width="30px"><p>
+       	<p>Home</p></div></a></li>
+       	<li><a href="contacts.html"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-addressbook-un.png" width="28px"><p>
+       	<p>Contact Book</p></div></a></li>
+       <li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-calendar-un.png" width="30px"><p>
+       	<p>Calendar</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-myplaxo-un.png" width="36px"><p>
+       	<p>My Card</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-task-un.png" width="20px"><p>
+       	<p>Tasks</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-notes-un.png" width="26px"><p>
+       	<p>Notes</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-ecards-un.png" width="30px"><p>
+       	<p>Gifts</p></div></a></li>
+	</ul>
+</div>
+</nav>
+
+<section>
+<div id="contacts_section">
+<h2>Contacts</h2>
+
+<table border="1px">
+<tbody>
+<tr>
+<td>
+	<div id="contact" style="padding:20px 40px; height:650px;">
+	<table id = "contact_table" style="width:300px; margin:5px auto;">
+        <tr>
+        <td><a href="javascript:void(0)" onClick="addContact()">+ NEW CONTACT</a></td>
+        <tr>	
+    </table>
+	</div>
+</td>
+<td>
+	<div id="detail" style="padding:10px 40px;height:650px;" >
+	<table id = "detail_table" style="width:400px; margin:5px auto;">
+    </table>
+    </div>
+</td>
+<tr>
+</tbody>
+</table>
+    
+</div>
+</section>
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+

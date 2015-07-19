@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script>
+function loginUser(){
+	var uemail = document.getElementById("uemail").value;
+	var pword = document.getElementById("pword").value;
+	var unparsed_users=localStorage.getItem("users");
+	var users=JSON.parse(unparsed_users); 
+	
+	var flag=false;
+	if (uemail!=""&& uemail!=null) {
+		for(var i=0; i<users.length; i++){
+			if(uemail==users[i].uemail&&pword==users[i].pword){
+				flag=true;
+				break;
+			}
+		}
+		
+		if(flag){
+			window.location = "home.html";
+			sessionStorage.setItem("whois",users[i].uname);
+			sessionStorage.setItem("uid",users[i].uid);
+			}
+			else{
+				alert("Invalid Credentials!");
+			}
+	}
+	
+	else{
+		alert("Please enter a valid username!");
+	}		
+}
+</script>
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+    
+    <nav>
+    <ul id="join">
+     <li><a href="login.html">Sign In</a></li>
+     <li><a href="register.html">Sign Up</a></li> 
+    </ul> 
+    </nav>
+</header>
+<hr>
+<section>
+<div id="join_section">
+<h2>Sign In</h2> 
+
+    <form name= "login_form">
+    E-mail address<br>
+    <input type = "email" id="uemail" name="uemail" /><br><br>
+    Password<br>
+    <input type = "password" id="pword" name="pword" /><br><br>
+   
+    <button type="button" onClick="loginUser()">Sign In</button>
+
+    <div style="float:right">or <a href="adlogin.html" style="color:#039; font-size:16px;"> sign in as an admin</a></div>
+	</form>
+</div>
+</section>
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+

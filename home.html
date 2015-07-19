@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+<script>
+
+window.onload=function(){
+	var whois=sessionStorage.getItem("whois");
+	document.getElementById("greet_section").innerHTML=whois;
+	document.getElementById("username").innerHTML=whois;
+
+}
+
+
+</script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="myscript.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+
+  	<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span id="username"></span>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="userinfo.html">My Info</a></li>
+      <li><a href="resetpword.html">Reset Password</a></li>
+      <li><a href="index.html">Signout</a></li>
+      <li class="divider"></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+	</div>
+  
+</header>
+
+<nav>
+<div id="menubar_container">
+    <ul id="menubar">
+    	<li><a href="home.html"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-home-un@2x.png" width="30px"><p>
+       	<p>Home</p></div></a></li>
+       	<li><a href="contacts.html"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-addressbook-un.png" width="28px"><p>
+       	<p>Contact Book</p></div></a></li>
+       <li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-calendar-un.png" width="30px"><p>
+       	<p>Calendar</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-myplaxo-un.png" width="36px"><p>
+       	<p>My Card</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-task-un.png" width="20px"><p>
+       	<p>Tasks</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-notes-un.png" width="26px"><p>
+       	<p>Notes</p></div></a></li>
+       	<li><a href="＃"><div class="menu_button">
+    	<img src="http://www.plaxo.com/m/plaxo/img/nav3/nav-ecards-un.png" width="30px"><p>
+       	<p>Gifts</p></div></a></li>
+	</ul>
+</div>
+</nav>
+
+<section>
+<div id="join_section">
+<h2>Welcome!<br><br><span id="greet_section"></span></h2>
+    
+</div>
+</section>
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+

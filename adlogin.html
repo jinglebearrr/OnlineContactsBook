@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script>
+function loginAdmin(){
+	var aname = document.getElementById("aname").value;
+        var apw = document.getElementById("apw").value;
+	var adpw=localStorage.getItem("adpw");
+        if(adpw==null)
+		adpw="admin";
+	if(aname=="admin"&&apw==adpw)
+		window.location = "adpage.html";
+	else
+		alert("Invalid Credentials!");	
+}
+</script>
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+    
+    <nav>
+    <ul id="join">
+     <li><a href="login.html">Sign In</a></li>
+     <li><a href="register.html">Sign Up</a></li> 
+    </ul> 
+    </nav>
+</header>
+<hr>
+<section>
+<div id="join_section">
+<h2>Administrator Sign In</h2> 
+
+    <form name= "adlogin_form">
+    Username<br>
+    <input type = "text" id="aname" name="aname" placeholder="admin"/><br><br>
+    Password<br>
+    <input type = "password" id="apw" name="apw" placeholder="admin" /><br><br>
+   
+    <button type="button" onClick="loginAdmin()">Sign In</button>
+    </form>
+   
+</div>
+</section>
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+

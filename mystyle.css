@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+body{
+	background-color:rgb(249,243,235);
+	font-family: Constantia, "Lucida Bright", "DejaVu Serif", Georgia, serif;	
+	color:#666;
+}
+
+header{
+	margin:0 auto;
+	width: 60%;
+	height:80px;
+}
+
+#logo_img{
+	float:left;
+}
+
+div#logo{
+	float:left;
+	margin-top:50px;
+	margin-left:30px;
+	font-size:20px;
+	font-family: cursive; 
+	color:white;
+}
+
+#footer{
+	bottom: 0px;
+	text-align: center;
+	color:#666;
+	width:100%;
+}
+
+hr{
+	 border-width: 1.9px;
+	 border-color:rgb(50,62,72);
+	 width: 101.3%;
+	 margin-left:-10px;	
+	 
+}
+
+nav #join{
+	margin-top:40px;
+	float:right;
+}
+
+
+#join li {
+    display: inline;
+	background-color: rgb(42,152,251);
+    padding: 10px 20px;
+    border-radius: 4px;	
+}
+
+#join li a:link, a:visited {
+    text-decoration: none;
+	color: white;
+}
+
+#join_section{
+	width: 340px;
+	margin:40px auto;
+	padding:20px 40px;
+	background-color: #fbfbfb;
+	border: 1px solid #e4e1e1;
+	color:#666;
+}
+
+#join_section input{
+	width: 330px;
+	height: 20px;
+}
+
+
+button{
+	background-color: rgb(42,152,251);
+    padding: 10px 20px;
+    border-radius: 4px;	
+	color: white;
+	border:none;
+	font-family: Constantia, "Lucida Bright", "DejaVu Serif", Georgia, serif;
+	font-size: 16px;
+}
+
+
+/*————————————————home.html——————————————————————*/
+
+#menubar_container{
+	width: 101.3%;
+	height: 85px;
+	margin-left:-10px;
+	background-color:rgb(50,62,72);
+	text-align:center;
+	margin-top:0px;	
+}
+
+.menu_button{
+	float:left;
+	width:195px;
+	height: 90px;
+	padding:13px 0px;
+	font-size:16px;
+}
+
+#menubar li {
+	display:inline;	
+}
+
+#menubar li a:link, a:visited {
+    text-decoration: none;
+	color:white;
+}
+
+#menubar li a:hover{
+	background-color:white ;
+}
+
+.dropdown{
+	float:right;
+	margin-top:30px;	
+}
+
+
+
+

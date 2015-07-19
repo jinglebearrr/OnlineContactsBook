@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script src="myscript.js"></script>
+<script>
+function newUser(){
+	var unparsed_users=localStorage.getItem("users");
+	var users=JSON.parse(unparsed_users); 
+	if(users==null)
+		users=[];
+		
+	var user={"uid":"","uname":"","uemail":"","pword":"","ugender":""} 
+	user.uid = users.length;
+	user.uname=document.getElementById("uname").value;
+	user.uemail=document.getElementById("uemail").value;
+	user.pword=document.getElementById("pword").value;
+	user.ugender=document.getElementById("ugender").value; 
+	
+	users.push(user);
+	localStorage.setItem("users",JSON.stringify(users));
+	alert("You've been sucessfully registered! Now there are " + users.length + " users.");	
+		
+	window.location = "home.html";
+	sessionStorage.setItem("whois",user.uname);
+	sessionStorage.setItem("uid",user.uid);
+}
+</script>
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+    
+    <nav>
+    <ul id="join">
+     <li><a href="login.html">Sign In</a></li>
+     <li><a href="register.html">Sign Up</a></li> 
+    </ul> 
+    </nav>
+</header>
+<hr>
+<section>
+<div id="join_section">
+<h2>Create an Account</h2>
+    <form name= "register_form"c>
+    Your name<br>
+    <input type = "text" id="uname" name="uname" /><br><br>
+    E-mail address<br>
+    <input type = "email" id="uemail" name="uemail" /><br><br>
+    Password<br>
+    <input type = "password" id="pword" name="pword" /><br><br>
+    Gender<br>
+    <input type = "text" id="ugender" name="ugender" list="genderlist"/>
+    <datalist id="genderlist">
+    <option value="Male"/>
+    <option value="Female"/>
+    </datalist><br><br><br>
+    <button type="button" onClick="newUser()">Register</button>
+    </form>
+</div>
+</section>
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+

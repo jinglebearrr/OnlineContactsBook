@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contacts Book</title>
+
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script>
+function resetPW(){
+	var op = document.getElementById("opword").value;
+	var np = document.getElementById("npword").value;
+	var cp = document.getElementById("cpword").value;
+        var adpw=localStorage.getItem("adpw");
+	
+	if(op!=adpw){
+		alert("Please re-enter your password!");
+		document.getElementById("opword").value="";
+		document.getElementById("opword").onfocus();
+	}
+	else if(np!=cp){
+		alert("Please re-enter your new password.");
+		document.getElementById("npword").value="";
+		document.getElementById("cpword").value="";
+		document.getElementById("npword").onfocus();
+	}
+	else{
+		localStorage.setItem("adpw",np);
+}
+alert("You have successfully changed your password!");
+window.location = "adpage.html";
+
+}
+</script>
+</head>
+
+<body>
+
+<header>
+    
+    <a href="index.html"><img id="logo_img" src="logo.jpg" height="90px" width="80px"/></a>
+    
+    <div id="logo">
+    Design by Eileen Qu
+    </div>
+    
+    <nav>
+    <ul id="join">
+     <li><a href="login.html">Sign In</a></li>
+     <li><a href="register.html">Sign Up</a></li> 
+    </ul> 
+    </nav>
+</header>
+<hr>
+<section>
+<div id="join_section">
+<h2>Change Password</h2><br>
+<form name= "adminResetPw_form">
+    Old Password<br>
+    <input type = "password" id="opword" name="opword" required/><br><br>
+    New Password<br>
+    <input type = "password" id="npword" name="npword" required/><br><br>
+    Confirm Password<br>
+    <input type = "password" id="cpword" name="cpword" required/><br><br>
+
+    <button type="button" onClick="resetPW()">Save</button>
+</form>
+</div>
+
+
+</section>
+
+<footer>
+<div id="footer">&copy;Marlabs Inc-2015</div>
+</footer>
+
+</body>
+</html>
+
